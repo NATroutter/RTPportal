@@ -11,6 +11,10 @@ public class Config {
         add(Material.WATER);
         add(Material.LAVA);
         add(Material.CACTUS);
+        add(Material.AIR);
+        add(Material.VOID_AIR);
+        add(Material.FIRE);
+
     }};
 
 }

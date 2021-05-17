@@ -8,16 +8,14 @@ import net.natroutter.natlibs.utilities.Utilities;
 import net.natroutter.rtpportal.RTPportal;
 import net.natroutter.rtpportal.utilities.Config;
 import net.natroutter.rtpportal.utilities.Lang;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.util.StringUtil;
 import org.sqlite.util.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Supplier;
 
 public class TeleportHandler {
 
@@ -41,29 +39,21 @@ public class TeleportHandler {
 
         p.sendMessage(lang.prefix + lang.SearchingLocation);
         Teleporting.put(p.getUniqueId(), true);
-        while (true) {
-            int x = ThreadLocalRandom.current().nextInt(-radius, radius + 1);
-            int z = ThreadLocalRandom.current().nextInt(-radius, radius + 1);
-            int y = 256;
 
-            Location randomLoc = new Location(world, x, y, z);
-            randomLoc = world.getHighestBlockAt(randomLoc).getLocation();
-            if (!config.UnsafeBlocks.contains(randomLoc.getBlock().getType())) {
-                randomLoc.setX(randomLoc.getBlockX() + 0.5);
-                randomLoc.add(0, 1, 0);
-                randomLoc.setZ(randomLoc.getBlockZ() + 0.5);
+        Block b;
+        Supplier<Integer> randomInt = () -> ThreadLocalRandom.current().nextInt(-radius, radius);
+        do {
+            b = p.getWorld().getHighestBlockAt(randomInt.get(), randomInt.get(), HeightMap.MOTION_BLOCKING);
+        } while (config.UnsafeBlocks.contains(b.getType()));
+        Location randomLoc = b.getLocation().add(0.5, 1, 0.5);
 
-                p.teleport(randomLoc);
-                StringHandler msg = new StringHandler(lang.Teleported).setPrefix(lang.prefix);
-                msg.replaceAll("{x}", randomLoc.getBlockX());
-                msg.replaceAll("{y}", randomLoc.getBlockY());
-                msg.replaceAll("{z}", randomLoc.getBlockZ());
-                msg.send(p);
-                Teleporting.remove(p.getUniqueId());
-                break;
-            }
-        }
-
+        p.teleport(randomLoc);
+        StringHandler msg = new StringHandler(lang.Teleported).setPrefix(lang.prefix);
+        msg.replaceAll("{x}", randomLoc.getBlockX());
+        msg.replaceAll("{y}", randomLoc.getBlockY());
+        msg.replaceAll("{z}", randomLoc.getBlockZ());
+        msg.send(p);
+        Teleporting.remove(p.getUniqueId());
 
     }
 

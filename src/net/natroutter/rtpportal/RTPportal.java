@@ -4,6 +4,7 @@ import net.natroutter.natlibs.NATLibs;
 import net.natroutter.natlibs.handlers.Database.YamlDatabase;
 import net.natroutter.natlibs.handlers.EventManager;
 import net.natroutter.natlibs.handlers.FileManager;
+import net.natroutter.natlibs.objects.ConfType;
 import net.natroutter.natlibs.utilities.Utilities;
 import net.natroutter.rtpportal.commands.RtpCmd;
 import net.natroutter.rtpportal.handlers.PortalHandler;
@@ -30,8 +31,8 @@ public class RTPportal extends JavaPlugin {
         NATLibs lib = new NATLibs(this);
 
         database = new YamlDatabase(this);
-        lang = new FileManager(this, FileManager.ConfType.Lang).load(Lang.class);
-        conf = new FileManager(this, FileManager.ConfType.Config).load(Config.class);
+        lang = new FileManager(this, ConfType.Lang).load(Lang.class);
+        conf = new FileManager(this, ConfType.Config).load(Config.class);
 
         utilities = new Utilities(this);
 
