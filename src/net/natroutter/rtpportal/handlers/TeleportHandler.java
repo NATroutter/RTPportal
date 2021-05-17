@@ -43,7 +43,7 @@ public class TeleportHandler {
         Block b;
         Supplier<Integer> randomInt = () -> ThreadLocalRandom.current().nextInt(-radius, radius);
         do {
-            b = p.getWorld().getHighestBlockAt(randomInt.get(), randomInt.get(), HeightMap.MOTION_BLOCKING);
+            b = world.getHighestBlockAt(randomInt.get(), randomInt.get(), HeightMap.MOTION_BLOCKING);
         } while (config.UnsafeBlocks.contains(b.getType()));
         Location randomLoc = b.getLocation().add(0.5, 1, 0.5);
 

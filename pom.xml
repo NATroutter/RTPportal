@@ -6,7 +6,7 @@
 
 <groupId>net.natroutter.rtpportal</groupId>
 <artifactId>RTPportal</artifactId>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <packaging>jar</packaging>
 
 <name>RTPportal</name>
