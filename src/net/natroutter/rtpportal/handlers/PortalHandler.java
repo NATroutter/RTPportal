@@ -1,12 +1,11 @@
 package net.natroutter.rtpportal.handlers;
 
 import net.natroutter.natlibs.handlers.Database.YamlDatabase;
-import net.natroutter.natlibs.objects.BasePlayer;
 import net.natroutter.natlibs.objects.Cuboid;
-import net.natroutter.natlibs.utilities.Utilities;
 import net.natroutter.rtpportal.RTPportal;
 import net.natroutter.rtpportal.utilities.Lang;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -24,7 +23,7 @@ public class PortalHandler implements Listener {
 
     @EventHandler
     public void onPortalEnter(PlayerMoveEvent e) {
-        BasePlayer p = BasePlayer.from(e.getPlayer());
+        Player p = e.getPlayer();
         Location pos1 = database.getLocation("Portal", "Pos1");
         Location pos2 = database.getLocation("Portal", "Pos2");
         if (pos1 != null && pos2 != null) {

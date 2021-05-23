@@ -2,7 +2,6 @@ package net.natroutter.rtpportal.handlers;
 
 import net.natroutter.natlibs.handlers.Database.YamlDatabase;
 import net.natroutter.natlibs.objects.BaseItem;
-import net.natroutter.natlibs.objects.BasePlayer;
 import net.natroutter.natlibs.utilities.StringHandler;
 import net.natroutter.natlibs.utilities.Utilities;
 import net.natroutter.rtpportal.RTPportal;
@@ -10,6 +9,7 @@ import net.natroutter.rtpportal.utilities.Config;
 import net.natroutter.rtpportal.utilities.Lang;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 import org.sqlite.util.StringUtils;
 
@@ -25,11 +25,11 @@ public class TeleportHandler {
     private static final YamlDatabase database = RTPportal.getDatabase();
     private static HashMap<UUID, Boolean> Teleporting = new HashMap<>();
 
-    public static boolean isTeleporting(BasePlayer p) {
+    public static boolean isTeleporting(Player p) {
         return Teleporting.containsKey(p.getUniqueId());
     }
 
-    public static void RandomTeleport(BasePlayer p) {
+    public static void RandomTeleport(Player p) {
         Integer radius = database.getInt("Portal","Radius");
         String worldName = database.getString("Portal","WorldName");
         if (radius == null || worldName == null) {return;}

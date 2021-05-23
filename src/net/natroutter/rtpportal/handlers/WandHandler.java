@@ -1,7 +1,6 @@
 package net.natroutter.rtpportal.handlers;
 
 import net.natroutter.natlibs.objects.BaseItem;
-import net.natroutter.natlibs.objects.BasePlayer;
 import net.natroutter.natlibs.utilities.StringHandler;
 import net.natroutter.rtpportal.RTPportal;
 import net.natroutter.rtpportal.objects.DoubleLocation;
@@ -10,6 +9,7 @@ import net.natroutter.rtpportal.utilities.Lang;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -36,7 +36,7 @@ public class WandHandler implements Listener {
             if (!BaseItem.from(e.getItem()).isSimilar(Items.wand())) {
                 return;
             }
-            BasePlayer p = BasePlayer.from(e.getPlayer());
+            Player p = e.getPlayer();
             Block block = e.getClickedBlock();
 
             if (!p.hasPermission("rtpportal.usewand")) {

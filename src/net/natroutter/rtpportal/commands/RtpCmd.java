@@ -1,7 +1,6 @@
 package net.natroutter.rtpportal.commands;
 
 import net.natroutter.natlibs.handlers.Database.YamlDatabase;
-import net.natroutter.natlibs.objects.BasePlayer;
 import net.natroutter.natlibs.utilities.StringHandler;
 import net.natroutter.rtpportal.RTPportal;
 import net.natroutter.rtpportal.handlers.WandHandler;
@@ -37,7 +36,7 @@ public class RtpCmd extends Command {
             sender.sendMessage(lang.prefix + lang.ingameOnly);
             return false;
         }
-        BasePlayer p = BasePlayer.from(sender);
+        Player p = (Player)sender;
 
         if (args.length == 0) {
             p.sendMessage(" ");
